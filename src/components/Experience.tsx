@@ -132,14 +132,14 @@ const Experience = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [slide, setSlide] = useState(0);
 
-  /* Trie en ordre chronologique inversé (plus récent → plus ancien) */
+  // Trie les expériences du plus récent au plus ancien
   const sorted = [...experiences].sort(
     (a, b) => startYear(b.period) - startYear(a.period)
   );
 
   const toggleCard = (i: number) => {
     setOpenIndex(i === openIndex ? null : i);
-    setSlide(0);
+    setSlide(0); // reset du carrousel
   };
 
   const next = (len: number) => setSlide((s) => (s + 1) % len);
@@ -148,7 +148,7 @@ const Experience = () => {
   return (
     <section className="py-20 bg-gray-50">
       <div className="max-w-6xl mx-auto px-4">
-        {/* Titre */}
+        {/* Titre principal */}
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">
             Expérience Professionnelle
@@ -158,14 +158,13 @@ const Experience = () => {
           </p>
         </div>
 
-        {/* Cartes */}
+        {/* Liste des expériences */}
         <div className="space-y-12">
           {sorted.map((exp, i) => (
             <div key={i}>
-              {/* Carte principale */}
               <Card
                 onClick={() => toggleCard(i)}
-                className="hover:shadow-xl cursor-pointer transition-shadow duration-300 animate-fade-in"
+                className="hover:shadow-xl cursor-pointer transition-shadow duration-300 animate-fade-in border border-blue-100"
               >
                 <CardHeader className="bg-blue-50 border-b">
                   <div className="flex items-start gap-4">
@@ -178,7 +177,6 @@ const Experience = () => {
                         {exp.title}
                       </CardTitle>
 
-                      {/* Lien dynamique vers le site de l’entreprise */}
                       <a
                         href={exp.companyUrl}
                         target="_blank"
@@ -197,76 +195,76 @@ const Experience = () => {
                   </div>
                 </CardHeader>
 
-                {/* Contenu détaillé */}
-                <CardContent className="p-8">
-                  <div className="grid lg:grid-cols-2 gap-8">
-                    {/* Responsabilités */}
-                    <div>
-                      <h4 className="text-lg font-semibold text-gray-900 mb-4">
-                        Responsabilités principales
-                      </h4>
-                      <ul className="space-y-3">
-                        {exp.responsibilities.map((r, j) => (
-                          <li key={j} className="flex items-start gap-3">
-                            <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                            <span className="text-gray-700">{r}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    {/* Réalisations */}
-                    {exp.achievements.length > 0 && (
+                {/* Détails affichés si la carte est ouverte */}
+                {openIndex === i && (
+                  <CardContent className="p-8 space-y-8">
+                    <div className="grid lg:grid-cols-2 gap-8">
+                      {/* Responsabilités */}
                       <div>
                         <h4 className="text-lg font-semibold text-gray-900 mb-4">
-                          Réalisations
+                          Responsabilités principales
                         </h4>
-                        <div className="space-y-4">
-                          {exp.achievements.map((a, j) => (
-                            <div
-                              key={j}
-                              className="p-4 bg-green-50 border-l-4 border-green-500 rounded"
-                            >
-                              <p className="text-gray-700 italic">"{a}"</p>
-                            </div>
+                        <ul className="space-y-3">
+                          {exp.responsibilities.map((r, j) => (
+                            <li key={j} className="flex items-start gap-3">
+                              <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                              <span className="text-gray-700">{r}</span>
+                            </li>
                           ))}
-                        </div>
+                        </ul>
                       </div>
-                    )}
-                  </div>
-                </CardContent>
+
+                      {/* Réalisations */}
+                      {exp.achievements.length > 0 && (
+                        <div>
+                          <h4 className="text-lg font-semibold text-gray-900 mb-4">
+                            Réalisations
+                          </h4>
+                          <div className="space-y-4">
+                            {exp.achievements.map((a, j) => (
+                              <div
+                                key={j}
+                                className="p-4 bg-green-50 border-l-4 border-green-500 rounded"
+                              >
+                                <p className="text-gray-700 italic">"{a}"</p>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Carrousel des images */}
+                    <div className="flex items-center justify-center gap-6 pt-8">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          prev(exp.images.length);
+                        }}
+                        className="p-2 rounded-full bg-blue-600 hover:bg-blue-700 transition"
+                      >
+                        <ChevronLeft className="w-6 h-6 text-white" />
+                      </button>
+
+                      <img
+                        src={exp.images[slide]}
+                        alt="Document"
+                        className="w-full max-w-3xl rounded-xl shadow-xl border border-blue-200"
+                      />
+
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          next(exp.images.length);
+                        }}
+                        className="p-2 rounded-full bg-blue-600 hover:bg-blue-700 transition"
+                      >
+                        <ChevronRight className="w-6 h-6 text-white" />
+                      </button>
+                    </div>
+                  </CardContent>
+                )}
               </Card>
-
-              {/* Carrousel */}
-              {openIndex === i && (
-                <div className="mt-6 flex items-center justify-center gap-6">
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      prev(exp.images.length);
-                    }}
-                    className="p-2 rounded-full bg-blue-600 hover:bg-blue-700 transition"
-                  >
-                    <ChevronLeft className="w-6 h-6 text-white" />
-                  </button>
-
-                  <img
-                    src={exp.images[slide]}
-                    alt="Document"
-                    className="w-full max-w-3xl rounded-xl shadow-xl border border-blue-200"
-                  />
-
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      next(exp.images.length);
-                    }}
-                    className="p-2 rounded-full bg-blue-600 hover:bg-blue-700 transition"
-                  >
-                    <ChevronRight className="w-6 h-6 text-white" />
-                  </button>
-                </div>
-              )}
             </div>
           ))}
         </div>
