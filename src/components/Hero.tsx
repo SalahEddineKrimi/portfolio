@@ -1,62 +1,97 @@
-
 import { Mail, Phone, MapPin, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Hero = () => {
   return (
-    <section className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 flex items-center justify-center px-4">
-      <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
-        <div className="text-white space-y-6 animate-fade-in">
-          <h1 className="text-5xl lg:text-6xl font-bold leading-tight">
-            Salah-Eddine
-            <span className="block text-blue-400">KRIMI</span>
-          </h1>
-          <p className="text-xl text-blue-200 font-medium">B.ing</p>
-          <p className="text-lg text-gray-300 leading-relaxed max-w-lg">
-            Ingénieur en génie civil spécialisé dans la conception des ponts et ouvrages d'art. 
-            Passionné par l'innovation structurelle et les technologies de construction.
-          </p>
-          
-          <div className="space-y-3 text-gray-300">
-            <div className="flex items-center gap-3">
-              <Mail className="w-5 h-5 text-blue-400" />
-              <a href="mailto:krimisalaheddine@gmail.com" className="hover:text-blue-400 transition-colors">
-                krimisalaheddine@gmail.com
-              </a>
-            </div>
-            <div className="flex items-center gap-3">
-              <Phone className="w-5 h-5 text-blue-400" />
-              <span>0 660 560 660</span>
-            </div>
-            <div className="flex items-center gap-3">
-              <MapPin className="w-5 h-5 text-blue-400" />
-              <span>El-Biar, Alger</span>
-            </div>
-          </div>
-
-          <div className="flex gap-4 pt-4">
-            <Button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-all duration-300 hover:scale-105">
-              <Download className="w-4 h-4 mr-2" />
-              Télécharger CV
-            </Button>
-            <Button variant="outline" className="border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-white px-6 py-3 rounded-lg transition-all duration-300">
-              Me Contacter
-            </Button>
-          </div>
-        </div>
-
-        <div className="flex justify-center lg:justify-end">
-          <div className="relative">
-            <div className="w-80 h-96 bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl shadow-2xl animate-scale-in"></div>
-            <img 
-              src="/lovable-uploads/dcf63844-562a-4a31-a778-751a79adaf9f.png" 
-              alt="Salah-Eddine KRIMI"
-              className="absolute inset-0 w-full h-full object-cover rounded-2xl shadow-2xl"
-            />
-          </div>
-        </div>
+    <>
+      {/* Fond continu pour toute la page (à placer une seule fois) */}
+      <div className="fixed inset-0 -z-50">
+        <div 
+          className="w-full h-full"
+          style={{
+            backgroundImage: "url('/imgFondEcran.png')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundAttachment: "fixed",
+            filter: "brightness(0.7)",
+          }}
+        />
+        <div className="absolute inset-0 bg-black/60"></div>
       </div>
-    </section>
+
+      {/* Section Hero */}
+      <section className="relative min-h-screen flex items-center justify-center px-4 pt-24">
+        <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center z-10">
+          {/* Partie texte */}
+          <div className="text-white space-y-6 animate-fade-in">
+            <h1 className="text-5xl lg:text-6xl font-bold leading-tight">
+              Salah-Eddine
+              <span className="block text-blue-300">KRIMI</span>
+            </h1>
+            <p className="text-xl text-blue-200 font-medium">B.ing</p>
+            <p className="text-lg text-gray-200 leading-relaxed max-w-lg">
+              Ingénieur en génie civil spécialisé dans la conception des ponts et ouvrages d'art. 
+              Passionné par l'innovation structurelle et les technologies de construction.
+            </p>
+
+            {/* Coordonnées */}
+            <div className="space-y-3 text-gray-300">
+              <div className="flex items-center gap-3">
+                <Mail className="w-5 h-5 text-blue-300" />
+                <a
+                  href="mailto:salah-eddine.krimi.1@ens.etsmtl.ca"
+                  className="hover:text-blue-300 transition-colors"
+                  aria-label="Envoyer un email"
+                >
+                  salah-eddine.krimi.1@ens.etsmtl.ca
+                </a>
+              </div>
+              <div className="flex items-center gap-3">
+                <Phone className="w-5 h-5 text-blue-300" />
+                <a href="tel:+213660560660" className="hover:text-blue-300 transition-colors">
+                  +213 660 560 660
+                </a>
+              </div>
+              <div className="flex items-center gap-3">
+                <MapPin className="w-5 h-5 text-blue-300" />
+                <span>El-Biar, Alger</span>
+              </div>
+            </div>
+
+            {/* Boutons */}
+            <div className="flex flex-wrap gap-4 pt-4">
+              <a href="/SalahEddine_Krimi_202506.pdf" download aria-label="Télécharger le CV">
+                <Button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-all duration-300 hover:scale-105">
+                  <Download className="w-4 h-4 mr-2" />
+                  Télécharger CV
+                </Button>
+              </a>
+              <Button
+                variant="outline"
+                className="border-blue-300 text-blue-300 hover:bg-blue-300 hover:text-black px-6 py-3 rounded-lg transition-all duration-300"
+              >
+                Me Contacter
+              </Button>
+            </div>
+          </div>
+
+          {/* Partie photo */}
+          <div className="flex justify-center lg:justify-end">
+            <div className="relative">
+              <img
+                src="/lovable-uploads/dcf63844-562a-4a31-a778-751a79adaf9f.png"
+                alt="Salah-Eddine KRIMI"
+            	className="w-full h-auto min-h-[400px] object-cover rounded-2xl shadow-xl border border-gray-200/20" /* Largeur fixe, hauteur proportionnelle */
+               style={{
+                 maxHeight: '70vh',
+                  objectPosition: 'top center'
+                }}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
   );
 };
 
