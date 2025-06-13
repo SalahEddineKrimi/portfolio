@@ -34,7 +34,7 @@ const Education = () => {
   ];
 
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="min-h-screen relative z-10 py-20 px-4 flex flex-col justify-center">
       <div className="max-w-6xl mx-auto px-4">
         {/* Titre section */}
         <div className="text-center mb-16">

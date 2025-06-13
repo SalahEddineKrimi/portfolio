@@ -3,36 +3,23 @@ import { Button } from "@/components/ui/button";
 
 const Hero = () => {
   return (
-    <>
-      {/* Fond continu pour toute la page (à placer une seule fois) */}
-      <div className="fixed inset-0 -z-50">
-        <div 
-          className="w-full h-full"
-          style={{
-            backgroundImage: "url('/imgFondEcran.png')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundAttachment: "fixed",
-            filter: "brightness(0.7)",
-          }}
-        />
-        <div className="absolute inset-0 bg-black/60"></div>
-      </div>
-
+    <>    
       {/* Section Hero */}
       <section className="relative min-h-screen flex items-center justify-center px-4 pt-24">
         <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center z-10">
-          {/* Partie texte */}
-          <div className="text-white space-y-6 animate-fade-in">
-            <h1 className="text-5xl lg:text-6xl font-bold leading-tight">
-              Salah-Eddine
-              <span className="block text-blue-300">KRIMI</span>
-            </h1>
-            <p className="text-xl text-blue-200 font-medium">B.ing</p>
-            <p className="text-lg text-gray-200 leading-relaxed max-w-lg">
-              Ingénieur en génie civil spécialisé dans la conception des ponts et ouvrages d'art. 
-              Passionné par l'innovation structurelle et les technologies de construction.
-            </p>
+            {/* Partie texte */}
+            <div className="text-white space-y-6 animate-fade-in">
+              <div className="flex items-baseline flex-wrap gap-x-4">
+                <h1 className="text-5xl lg:text-6xl font-bold leading-tight whitespace-nowrap">
+                  Salah-Eddine <span className="text-blue-300">KRIMI</span>
+                </h1>
+                <span className="text-2xl text-blue-200 font-medium whitespace-nowrap">B.ing</span>
+              </div>
+
+              <p className="text-lg text-gray-200 leading-relaxed max-w-lg">
+                Ingénieur en génie civil spécialisé dans la conception des ponts et ouvrages d'art. 
+                Passionné par l'innovation structurelle et les technologies de construction.
+              </p>
 
             {/* Coordonnées */}
             <div className="space-y-3 text-gray-300">

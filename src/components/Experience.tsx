@@ -108,7 +108,7 @@ const experiences: ExperienceItem[] = [
   {
     period: "2017 à 2019",
     title: "Technicien en contrôle des matériaux",
-    company: "Groupe ABS, Blainville",
+    company: "Groupe ABS",
     companyUrl: "https://www.groupeabs.com/",
     responsibilities: [
       "Vérifier les matériaux livrés au chantier",
@@ -146,7 +146,7 @@ const Experience = () => {
   const prev = (len: number) => setSlide((s) => (s ? s - 1 : len - 1));
 
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="min-h-screen relative z-10 py-20 px-4 flex flex-col justify-center">
       <div className="max-w-6xl mx-auto px-4">
         {/* Titre principal */}
         <div className="text-center mb-16">
