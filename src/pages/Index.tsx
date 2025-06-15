@@ -15,8 +15,9 @@ const Index = () => {
           style={{
             backgroundImage: "url('/imgFondEcran.png')",
             backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundAttachment: "fixed",
+            backgroundPosition: "top",
+            backgroundRepeat: "no-repeat",
+            backgroundAttachment: "scroll",
             filter: "brightness(0.7)",
           }}
         />

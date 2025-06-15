@@ -5,7 +5,7 @@ const Hero = () => {
   return (
     <>    
       {/* Section Hero */}
-      <section className="relative min-h-screen flex items-center justify-center px-4 pt-24">
+      <section className="min-h-screen relative z-10 py-20 px-4 flex flex-col justify-center">
         <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center z-10">
             {/* Partie texte */}
             <div className="text-white space-y-6 animate-fade-in">
