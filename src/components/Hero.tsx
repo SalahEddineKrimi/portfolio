@@ -68,7 +68,7 @@ const Hero = () => {
               <img
                 src="/lovable-uploads/dcf63844-562a-4a31-a778-751a79adaf9f.png"
                 alt="Salah-Eddine KRIMI"
-            	className="w-full h-auto min-h-[400px] object-cover rounded-2xl shadow-xl border border-gray-200/20" /* Largeur fixe, hauteur proportionnelle */
+            	className="w-full h-full min-h-[400px] object-cover rounded-2xl shadow-xl border border-gray-200/20" /* Largeur fixe, hauteur proportionnelle */
                style={{
                  maxHeight: '70vh',
                   objectPosition: 'top center'

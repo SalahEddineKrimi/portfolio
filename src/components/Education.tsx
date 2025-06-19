@@ -49,17 +49,15 @@ const Education = () => {
           {education.map((edu, index) => (
             <div key={index}>
               {/* Carte diplômes */}
-              <Card
-                onClick={() =>
-                  setVisibleDiplomaIndex(index === visibleDiplomaIndex ? null : index)
-                }
-                className={`hover:shadow-xl transition-all duration-300 cursor-pointer border-2 ${
-                  visibleDiplomaIndex === index
-                    ? "border-blue-400"
-                    : "border-gray-200"
-                }`}
-                style={{ animationDelay: `${index * 0.2}s` }}
-              >
+                  <Card
+                    onClick={() =>
+                      setVisibleDiplomaIndex(index === visibleDiplomaIndex ? null : index)
+                    }
+                    className={`transform transition-transform duration-300 ease-in-out cursor-pointer border-2 hover:-translate-y-1 hover:scale-[1.02] hover:shadow-2xl ${
+                      visibleDiplomaIndex === index ? "border-blue-400" : "border-gray-200"
+                    }`}
+                    style={{ animationDelay: `${index * 0.2}s` }}
+                  >
                 <CardContent className="p-6">
                   <div className="flex flex-col lg:flex-row lg:items-center gap-6">
                     {/* Icone & année */}

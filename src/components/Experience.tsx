@@ -13,9 +13,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-/* -------------------------------------------------------------------------- */
-/*                              Types & Helpers                               */
-/* -------------------------------------------------------------------------- */
 interface ExperienceItem {
   period: string;
   title: string;
@@ -26,13 +23,9 @@ interface ExperienceItem {
   images: string[];
 }
 
-/** Extrait la première année (YYYY) d’une chaîne. */
 const startYear = (period: string): number =>
   Number(period.match(/\d{4}/)?.[0] ?? 0);
 
-/* -------------------------------------------------------------------------- */
-/*                         Données (PNG dans /public)                         */
-/* -------------------------------------------------------------------------- */
 const experiences: ExperienceItem[] = [
   {
     period: "2024 à 2025",
@@ -125,21 +118,17 @@ const experiences: ExperienceItem[] = [
   },
 ];
 
-/* -------------------------------------------------------------------------- */
-/*                               Composant UI                                 */
-/* -------------------------------------------------------------------------- */
 const Experience = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [slide, setSlide] = useState(0);
 
-  // Trie les expériences du plus récent au plus ancien
   const sorted = [...experiences].sort(
     (a, b) => startYear(b.period) - startYear(a.period)
   );
 
   const toggleCard = (i: number) => {
     setOpenIndex(i === openIndex ? null : i);
-    setSlide(0); // reset du carrousel
+    setSlide(0);
   };
 
   const next = (len: number) => setSlide((s) => (s + 1) % len);
@@ -148,7 +137,6 @@ const Experience = () => {
   return (
     <section className="min-h-screen relative z-10 py-20 px-4 flex flex-col justify-center">
       <div className="max-w-6xl mx-auto px-4">
-        {/* Titre principal */}
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">
             Expérience Professionnelle
@@ -158,13 +146,12 @@ const Experience = () => {
           </p>
         </div>
 
-        {/* Liste des expériences */}
         <div className="space-y-12">
           {sorted.map((exp, i) => (
             <div key={i}>
               <Card
                 onClick={() => toggleCard(i)}
-                className="hover:shadow-xl cursor-pointer transition-shadow duration-300 animate-fade-in border border-blue-100"
+                className="group hover:shadow-2xl hover:-translate-y-1 hover:rotate-1 transition-all duration-300 cursor-pointer border border-blue-100"
               >
                 <CardHeader className="bg-blue-50 border-b">
                   <div className="flex items-start gap-4">
@@ -195,11 +182,9 @@ const Experience = () => {
                   </div>
                 </CardHeader>
 
-                {/* Détails affichés si la carte est ouverte */}
                 {openIndex === i && (
                   <CardContent className="p-8 space-y-8">
                     <div className="grid lg:grid-cols-2 gap-8">
-                      {/* Responsabilités */}
                       <div>
                         <h4 className="text-lg font-semibold text-gray-900 mb-4">
                           Responsabilités principales
@@ -214,7 +199,6 @@ const Experience = () => {
                         </ul>
                       </div>
 
-                      {/* Réalisations */}
                       {exp.achievements.length > 0 && (
                         <div>
                           <h4 className="text-lg font-semibold text-gray-900 mb-4">
@@ -234,7 +218,6 @@ const Experience = () => {
                       )}
                     </div>
 
-                    {/* Carrousel des images */}
                     <div className="flex items-center justify-center gap-6 pt-8">
                       <button
                         onClick={(e) => {
