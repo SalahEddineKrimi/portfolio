@@ -1,10 +1,9 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Briefcase,
   Calendar,
-  CheckCircle,
-  ChevronLeft,
-  ChevronRight,
+  PlusCircle,
+  Download,
 } from "lucide-react";
 import {
   Card,
@@ -12,6 +11,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Document, Page, pdfjs } from "react-pdf";
+import "react-pdf/dist/esm/Page/AnnotationLayer.css";
+
+// 
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js`;
+
 
 interface ExperienceItem {
   period: string;
@@ -20,13 +25,10 @@ interface ExperienceItem {
   companyUrl: string;
   responsibilities: string[];
   achievements: string[];
-  images: string[];
+  pdfUrl: string;
 }
 
-const startYear = (period: string): number =>
-  Number(period.match(/\d{4}/)?.[0] ?? 0);
-
-const experiences: ExperienceItem[] = [
+ const experiences: ExperienceItem[] = [
   {
     period: "2024 à 2025",
     title:
@@ -45,7 +47,7 @@ const experiences: ExperienceItem[] = [
       "Reconnaissance de la cheffe d'équipe pour ma rigueur et ma rapidité d'apprentissage",
       "Appréciation pour mon autonomie et ma gestion de la pression",
     ],
-    images: ["/img007.png", "/img008.png"],
+    pdfUrl: "/pdfs/PerformanceEvaluationWorkerReport.pdf",
   },
   {
     period: "2023 à 2024",
@@ -64,7 +66,7 @@ const experiences: ExperienceItem[] = [
       "Note parfaite de 5/5 attribuée par 77 étudiants",
       "Commentaires exclusivement positifs sur la plateforme Nimbus",
     ],
-    images: ["/img005.png", "/img006.png"],
+    pdfUrl: "/pdfs/LettreAttestationRecommandation.pdf",
   },
   {
     period: "Automne 2022",
@@ -79,7 +81,7 @@ const experiences: ExperienceItem[] = [
       "Contribuer à un logiciel interne et réviser un plan d'entrée en poste",
     ],
     achievements: [],
-    images: ["/img003.png", "/img004.png"],
+    pdfUrl: "/pdfs/ÉvaluationEmployeur_Stage.pdf",
   },
   {
     period: "2019 à 2022",
@@ -96,7 +98,7 @@ const experiences: ExperienceItem[] = [
     achievements: [
       "Courriel de remerciement soulignant mon travail remarquable et mon souci du détail",
     ],
-    images: ["/img009.png", "/img010.png"],
+    pdfUrl: "/pdfs/CourrielRemerciementHQ.pdf",
   },
   {
     period: "2017 à 2019",
@@ -114,141 +116,144 @@ const experiences: ExperienceItem[] = [
       "Certificat de reconnaissance soulignant mon implication professionnelle",
       "Formation et initiation de nouveaux employés",
     ],
-    images: ["/img001.png", "/img002.png"],
+    pdfUrl: "/pdfs/CertificatReconnaissanceGroupeABS_KSE.pdf",
   },
 ];
 
+
 const Experience = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-  const [slide, setSlide] = useState(0);
+  const [numPages, setNumPages] = useState<(number | null)[]>(experiences.map(() => null));
+  const [width, setWidth] = useState<number>(600);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  const sorted = [...experiences].sort(
-    (a, b) => startYear(b.period) - startYear(a.period)
-  );
-
-  const toggleCard = (i: number) => {
-    setOpenIndex(i === openIndex ? null : i);
-    setSlide(0);
-  };
-
-  const next = (len: number) => setSlide((s) => (s + 1) % len);
-  const prev = (len: number) => setSlide((s) => (s ? s - 1 : len - 1));
+  useEffect(() => {
+    if (containerRef.current) {
+      setWidth(containerRef.current.offsetWidth - 32);
+    }
+  }, [openIndex]);
 
   return (
     <section className="min-h-screen relative z-10 py-20 px-4 flex flex-col justify-center">
-      <div className="max-w-6xl mx-auto px-4">
+      <div className="max-w-4xl mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">
-            Expérience Professionnelle
-          </h2>
-          <p className="text-xl text-gray-600">
-            Parcours et réalisations en ingénierie
+          <h2 className="text-4xl font-bold text-white mb-4">Expérience professionnelle</h2>
+          <p className="text-xl text-gray-300">
+            Mon parcours en ingénierie et en construction
           </p>
         </div>
 
-        <div className="space-y-12">
-          {sorted.map((exp, i) => (
-            <div key={i}>
-              <Card
-                onClick={() => toggleCard(i)}
-                className="group hover:shadow-2xl hover:-translate-y-1 hover:rotate-1 transition-all duration-300 cursor-pointer border border-blue-100"
+        <div className="grid gap-10 grid-cols-1" ref={containerRef}>
+          {experiences.map((exp, i) => (
+            <Card
+              key={i}
+              className="bg-white/10 border border-white/20 backdrop-blur-sm rounded-2xl shadow-xl transition hover:scale-[1.01]"
+            >
+              <div
+                onClick={() => setOpenIndex(openIndex === i ? null : i)}
+                className="cursor-pointer"
               >
-                <CardHeader className="bg-blue-50 border-b">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
-                      <Briefcase className="w-6 h-6 text-white" />
-                    </div>
-
-                    <div className="flex-1">
-                      <CardTitle className="text-xl font-bold text-gray-900 mb-2">
-                        {exp.title}
-                      </CardTitle>
-
-                      <a
-                        href={exp.companyUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={(e) => e.stopPropagation()}
-                        className="text-lg font-semibold text-blue-600 hover:underline mb-1 block"
-                      >
-                        {exp.company}
-                      </a>
-
-                      <div className="flex items-center gap-2 text-gray-600 text-lg">
-                        <Calendar className="w-5 h-5" />
-                        <span>{exp.period}</span>
+                <CardHeader className="p-4 md:p-6">
+                  <div className="flex items-start gap-4 justify-between">
+                    <div className="flex gap-4">
+                      <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
+                        <Briefcase className="w-6 h-6 text-white" />
                       </div>
+                      <div>
+                        <CardTitle className="text-white text-lg font-semibold">
+                          {exp.title}
+                        </CardTitle>
+                        <a
+                          href={exp.companyUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="text-blue-300 text-sm hover:underline block"
+                        >
+                          {exp.company}
+                        </a>
+                        <div className="flex items-center gap-2 text-gray-200 text-sm mt-1">
+                          <Calendar className="w-4 h-4" />
+                          <span>{exp.period}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-1 text-blue-300 text-xs">
+                      <PlusCircle className="w-4 h-4" />
+                      <span className="hidden sm:inline">Voir plus</span>
                     </div>
                   </div>
                 </CardHeader>
+              </div>
 
-                {openIndex === i && (
-                  <CardContent className="p-8 space-y-8">
-                    <div className="grid lg:grid-cols-2 gap-8">
-                      <div>
-                        <h4 className="text-lg font-semibold text-gray-900 mb-4">
-                          Responsabilités principales
-                        </h4>
-                        <ul className="space-y-3">
-                          {exp.responsibilities.map((r, j) => (
-                            <li key={j} className="flex items-start gap-3">
-                              <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                              <span className="text-gray-700">{r}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
+              {openIndex === i && (
+                <CardContent className="p-6 text-gray-100 space-y-6">
+                  <div>
+                    <h4 className="text-lg font-semibold text-white mb-3">
+                      Responsabilités principales
+                    </h4>
+                    <ul className="space-y-2 list-disc pl-5 text-gray-200">
+                      {exp.responsibilities.map((r, j) => (
+                        <li key={j}>{r}</li>
+                      ))}
+                    </ul>
+                  </div>
 
-                      {exp.achievements.length > 0 && (
-                        <div>
-                          <h4 className="text-lg font-semibold text-gray-900 mb-4">
-                            Réalisations
-                          </h4>
-                          <div className="space-y-4">
-                            {exp.achievements.map((a, j) => (
-                              <div
-                                key={j}
-                                className="p-4 bg-green-50 border-l-4 border-green-500 rounded"
-                              >
-                                <p className="text-gray-700 italic">"{a}"</p>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      )}
+                  {exp.achievements.length > 0 && (
+                    <div>
+                      <h4 className="text-lg font-semibold text-white mb-3">
+                        Réalisations
+                      </h4>
+                      <ul className="space-y-2 list-disc pl-5 text-green-300">
+                        {exp.achievements.map((a, j) => (
+                          <li key={j}>{a}</li>
+                        ))}
+                      </ul>
                     </div>
+                  )}
 
-                    <div className="flex items-center justify-center gap-6 pt-8">
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          prev(exp.images.length);
-                        }}
-                        className="p-2 rounded-full bg-blue-600 hover:bg-blue-700 transition"
-                      >
-                        <ChevronLeft className="w-6 h-6 text-white" />
-                      </button>
+                  <div className="bg-white rounded-xl p-4 shadow-md">
+                    <Document
+                      file={exp.pdfUrl}
+                      onLoadSuccess={({ numPages }) => {
+                        setNumPages((prev) => {
+                          const updated = [...prev];
+                          updated[i] = numPages;
+                          return updated;
+                        });
+                      }}
+                      onLoadError={(error) =>
+                        console.error("Erreur de chargement PDF:", error)
+                      }
+                      loading={<p className="text-center text-gray-500">Chargement du PDF...</p>}
+                    >
+                      {numPages[i] &&
+                        Array.from({ length: numPages[i]! }, (_, index) => (
+                          <Page
+                            key={`page_${index + 1}`}
+                            pageNumber={index + 1}
+                            width={width}
+                            renderAnnotationLayer={false}
+                            renderTextLayer={false}
+                            className="my-4 border rounded shadow"
+                          />
+                        ))}
+                    </Document>
+                  </div>
 
-                      <img
-                        src={exp.images[slide]}
-                        alt="Document"
-                        className="w-full max-w-3xl rounded-xl shadow-xl border border-blue-200"
-                      />
-
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          next(exp.images.length);
-                        }}
-                        className="p-2 rounded-full bg-blue-600 hover:bg-blue-700 transition"
-                      >
-                        <ChevronRight className="w-6 h-6 text-white" />
-                      </button>
-                    </div>
-                  </CardContent>
-                )}
-              </Card>
-            </div>
+                  <div className="flex justify-center pt-4">
+                    <a
+                      href={exp.pdfUrl}
+                      download
+                      onClick={(e) => e.stopPropagation()}
+                      className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow-md"
+                    >
+                      <Download className="w-4 h-4" /> Télécharger le PDF
+                    </a>
+                  </div>
+                </CardContent>
+              )}
+            </Card>
           ))}
         </div>
       </div>

@@ -3,23 +3,23 @@ import { Button } from "@/components/ui/button";
 
 const Hero = () => {
   return (
-    <>    
+    <>
       {/* Section Hero */}
-      <section className="min-h-screen relative z-10 py-20 px-4 flex flex-col justify-center">
+      <section className="min-h-screen relative z-10 py-20 px-4 flex flex-col justify-center overflow-hidden">
         <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center z-10">
-            {/* Partie texte */}
-            <div className="text-white space-y-6 animate-fade-in">
-              <div className="flex items-baseline flex-wrap gap-x-4">
-                <h1 className="text-5xl lg:text-6xl font-bold leading-tight whitespace-nowrap">
-                  Salah-Eddine <span className="text-blue-300">KRIMI</span>
-                </h1>
-                <span className="text-2xl text-blue-200 font-medium whitespace-nowrap">B.ing</span>
-              </div>
+          {/* Partie texte */}
+          <div className="text-white space-y-6 animate-fade-in">
+            <div className="flex items-baseline flex-wrap gap-x-4">
+              <h1 className="text-5xl lg:text-6xl font-bold leading-tight">
+                Salah-Eddine <span className="text-blue-300">KRIMI</span>
+              </h1>
+              <span className="text-2xl text-blue-200 font-medium">B.ing</span>
+            </div>
 
-              <p className="text-lg text-gray-200 leading-relaxed max-w-lg">
-                Ingénieur en génie civil spécialisé dans la conception des ponts et ouvrages d'art. 
-                Passionné par l'innovation structurelle et les technologies de construction.
-              </p>
+            <p className="text-lg text-gray-200 leading-relaxed max-w-lg">
+              Ingénieur en génie civil spécialisé dans la conception des ponts et ouvrages d'art.
+              Passionné par l'innovation structurelle et les technologies de construction.
+            </p>
 
             {/* Coordonnées */}
             <div className="space-y-3 text-gray-300">
@@ -27,7 +27,7 @@ const Hero = () => {
                 <Mail className="w-5 h-5 text-blue-300" />
                 <a
                   href="mailto:salah-eddine.krimi.1@ens.etsmtl.ca"
-                  className="hover:text-blue-300 transition-colors"
+                  className="hover:text-blue-300 transition-colors break-all"
                   aria-label="Envoyer un email"
                 >
                   salah-eddine.krimi.1@ens.etsmtl.ca
@@ -35,7 +35,10 @@ const Hero = () => {
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-blue-300" />
-                <a href="tel:+213660560660" className="hover:text-blue-300 transition-colors">
+                <a
+                  href="tel:+213660560660"
+                  className="hover:text-blue-300 transition-colors"
+                >
                   +213 660 560 660
                 </a>
               </div>
@@ -63,14 +66,14 @@ const Hero = () => {
           </div>
 
           {/* Partie photo */}
-          <div className="flex justify-center lg:justify-end">
+          <div className="flex justify-center lg:justify-end max-w-full overflow-hidden">
             <div className="relative">
               <img
                 src="/lovable-uploads/dcf63844-562a-4a31-a778-751a79adaf9f.png"
                 alt="Salah-Eddine KRIMI"
-            	className="w-full h-full min-h-[400px] object-cover rounded-2xl shadow-xl border border-gray-200/20" /* Largeur fixe, hauteur proportionnelle */
-               style={{
-                 maxHeight: '70vh',
+                className="w-full max-w-xs sm:max-w-sm h-auto min-h-[400px] object-cover rounded-2xl shadow-xl border border-gray-200/20"
+                style={{
+                  maxHeight: '70vh',
                   objectPosition: 'top center'
                 }}
               />

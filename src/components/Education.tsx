@@ -1,9 +1,20 @@
-import { useState } from "react";
-import { GraduationCap } from "lucide-react";
+import { useEffect, useState } from "react";
+import { GraduationCap, ExternalLink } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { motion } from "framer-motion";
 
 const Education = () => {
-  const [visibleDiplomaIndex, setVisibleDiplomaIndex] = useState<number | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    handleResize(); // Check initial
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const education = [
     {
@@ -34,77 +45,62 @@ const Education = () => {
   ];
 
   return (
-    <section className="min-h-screen relative z-10 py-20 px-4 flex flex-col justify-center">
+    <section className="min-h-screen relative z-10 py-20 px-4 flex flex-col justify-center overflow-x-hidden">
       <div className="max-w-6xl mx-auto px-4">
-        {/* Titre section */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Formation</h2>
-          <p className="text-xl text-gray-600">
-            Parcours académique en génie civil
-          </p>
-        </div>
+        <h2 className="text-3xl font-bold text-center text-white mb-12 flex items-center justify-center gap-2">
+          <GraduationCap className="w-8 h-8 text-blue-300" />
+          Parcours académique
+        </h2>
 
-        {/* Liste des diplômes */}
-        <div className="space-y-8">
+        <div className="grid gap-8 md:grid-cols-1">
           {education.map((edu, index) => (
-            <div key={index}>
-              {/* Carte diplômes */}
-                  <Card
-                    onClick={() =>
-                      setVisibleDiplomaIndex(index === visibleDiplomaIndex ? null : index)
-                    }
-                    className={`transform transition-transform duration-300 ease-in-out cursor-pointer border-2 hover:-translate-y-1 hover:scale-[1.02] hover:shadow-2xl ${
-                      visibleDiplomaIndex === index ? "border-blue-400" : "border-gray-200"
-                    }`}
-                    style={{ animationDelay: `${index * 0.2}s` }}
-                  >
-                <CardContent className="p-6">
-                  <div className="flex flex-col lg:flex-row lg:items-center gap-6">
-                    {/* Icone & année */}
-                    <div className="flex items-center gap-4">
-                      <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
-                        <GraduationCap className="w-8 h-8 text-blue-600" />
-                      </div>
-                      <div className="flex items-center gap-2 text-blue-600 font-semibold text-lg">
-                        {edu.year}
-                      </div>
-                    </div>
-
-                    {/* Infos diplôme */}
-                    <div className="flex-1">
-                      <h3 className="text-xl font-bold text-gray-900 mb-2">
-                        {edu.degree}
-                      </h3>
-
-                      {/* Lien vers l’établissement */}
-                      <a
-                        href={edu.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={(e) => e.stopPropagation()}
-                        className="text-blue-600 hover:underline text-base"
-                      >
-                        {edu.institution}
-                      </a>
-                    </div>
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.2 }}
+            >
+              <Card
+                className="bg-white/10 border border-blue-300/30 text-white hover:border-blue-300 transition-all duration-300"
+                onMouseEnter={() => setHoveredIndex(index)}
+                onMouseLeave={() => setHoveredIndex(null)}
+              >
+                <CardContent className="p-6 space-y-4">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-xl font-semibold">{edu.degree}</h3>
+                    <span className="text-blue-200 font-medium">{edu.year}</span>
                   </div>
+
+                  <div className="text-blue-100">
+                    <a
+                      href={edu.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:underline inline-flex items-center gap-1"
+                    >
+                      {edu.institution}
+                      <ExternalLink className="w-4 h-4" />
+                    </a>
+                  </div>
+
+                  <p className="text-sm text-gray-300 italic">{edu.type}</p>
+
+                  {(isMobile || hoveredIndex === index) && (
+                    <div className="mt-4 text-center px-4">
+                      <img
+                        src={edu.image}
+                        alt={`Diplôme de ${edu.institution}`}
+                        className="mx-auto w-full max-w-2xl rounded-2xl shadow-xl border border-blue-300"
+                        onError={() =>
+                          console.error("Image non trouvée:", edu.image)
+                        }
+                      />
+                    </div>
+                  )}
                 </CardContent>
               </Card>
-
-              {/* Image du diplôme */}
-              {visibleDiplomaIndex === index && (
-                <div className="mt-4 text-center">
-                  <img
-                    src={edu.image}
-                    alt={`Diplôme de ${edu.institution}`}
-                    className="mx-auto w-full max-w-4xl rounded-2xl shadow-xl border border-blue-300"
-                    onError={() =>
-                      console.error("Image non trouvée:", edu.image)
-                    }
-                  />
-                </div>
-              )}
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

@@ -9,7 +9,7 @@ const Index = () => {
   return (
     <>
       {/* Fond d’écran commun à toute la page */}
-      <div className="fixed inset-0 -z-50">
+      <div className="fixed inset-0 -z-50  overflow-hidden w-screen h-screen">
         <div 
           className="w-full h-full"
           style={{
