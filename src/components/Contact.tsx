@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 
 const Contact = () => {
   return (
-    <section className="py-20 bg-gradient-to-br from-slate-900 to-blue-900">
+    <section id="contact" className="py-20 bg-gradient-to-br from-slate-900 to-blue-900">
       <div className="max-w-6xl mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-white mb-4">Contact</h2>
@@ -42,17 +42,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <p className="text-blue-200 text-sm">Téléphone</p>
-                  <p className="text-white">0 660 560 660</p>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
-                  <MapPin className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <p className="text-blue-200 text-sm">Localisation</p>
-                  <p className="text-white">El-Biar, Alger</p>
+                  <p className="text-white">+213 660 560 660</p>
                 </div>
               </div>
             </div>

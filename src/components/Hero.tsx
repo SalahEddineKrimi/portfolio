@@ -1,10 +1,14 @@
-import { Mail, Phone, MapPin, Download } from "lucide-react";
+import { Mail, Phone, MapPin, Download, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Hero = () => {
+  const handleScrollToContact = () => {
+    const section = document.getElementById("contact");
+    section?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <>
-      {/* Section Hero */}
       <section className="min-h-screen relative z-10 py-20 px-4 flex flex-col justify-center overflow-hidden">
         <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center z-10">
           {/* Partie texte */}
@@ -31,6 +35,15 @@ const Hero = () => {
                   aria-label="Envoyer un email"
                 >
                   salah-eddine.krimi.1@ens.etsmtl.ca
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/salah-eddine-krimi-967072143/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Profil LinkedIn"
+                  className="ml-2 hover:text-blue-300 transition-colors"
+                >
+                  <Linkedin className="w-5 h-5" />
                 </a>
               </div>
               <div className="flex items-center gap-3">
@@ -59,6 +72,7 @@ const Hero = () => {
               <Button
                 variant="outline"
                 className="border-blue-300 text-blue-300 hover:bg-blue-300 hover:text-black px-6 py-3 rounded-lg transition-all duration-300"
+                onClick={handleScrollToContact}
               >
                 Me Contacter
               </Button>

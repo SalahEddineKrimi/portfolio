@@ -9,10 +9,14 @@
     "paths": {
       "@/*": ["./src/*"]
     },
+    "allowJs": true,                    // Autoriser les fichiers .js
+    "esModuleInterop": true,           //  Pour import JS/ES modules sans erreur
+    "module": "esnext",                // Compatible avec les imports dynamiques modernes
+    "moduleResolution": "node",       //  Pour bien résoudre les modules comme pdfjs-dist
+    "resolveJsonModule": true,        // (utile si tu importes du JSON)
+    "skipLibCheck": true,
     "noImplicitAny": false,
     "noUnusedParameters": false,
-    "skipLibCheck": true,
-    "allowJs": true,
     "noUnusedLocals": false,
     "strictNullChecks": false
   }
