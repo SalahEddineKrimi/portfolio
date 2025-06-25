@@ -28,9 +28,9 @@ const Index = () => {
       <div className="relative z-10 flex flex-col">
         <Hero />
         <Education />
-        <Skills />
         <Experience />
         <Perfectionnement />
+        <Skills />
         <Contact />
       </div>
     </>

@@ -166,18 +166,17 @@ const Experience = () => {
   };
 
   return (
-    <section className="min-h-screen relative z-10 py-20 px-4 flex flex-col justify-center">
+    <section id="experience" className="min-h-screen relative z-10 py-20 px-4 flex flex-col justify-center">
       <div className="max-w-4xl mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-white mb-4">Expérience professionnelle</h2>
-          <p className="text-xl text-gray-300">Mon parcours en ingénierie et en construction</p>
         </div>
 
         <div className="grid gap-10 grid-cols-1" ref={containerRef}>
           {experiences.map((exp, i) => (
             <Card
               key={i}
-              className="bg-white/10 border border-white/20 backdrop-blur-sm rounded-2xl shadow-xl transition hover:scale-[1.01]"
+              className="border-0 border-b-2 hover:border-b-8 border-b-blue-300 bg-transparent text-white transition-all duration-300 rounded-none"
             >
               <div onClick={() => setOpenIndex(openIndex === i ? null : i)} className="cursor-pointer">
                 <CardHeader className="p-4 md:p-6">

@@ -45,7 +45,7 @@ const Education = () => {
   ];
 
   return (
-    <section className="min-h-screen relative z-10 py-20 px-4 flex flex-col justify-center overflow-x-hidden">
+    <section id="education" className="min-h-screen relative z-10 py-20 px-4 flex flex-col justify-center overflow-x-hidden">
       <div className="max-w-6xl mx-auto px-4">
         <h2 className="text-3xl font-bold text-center text-white mb-12 flex items-center justify-center gap-2">
           <GraduationCap className="w-8 h-8 text-blue-300" />
@@ -62,7 +62,7 @@ const Education = () => {
               transition={{ duration: 0.6, delay: index * 0.2 }}
             >
               <Card
-                className="bg-white/10 border border-blue-300/30 text-white hover:border-blue-300 transition-all duration-300"
+                className="border-0 border-b-2 hover:border-b-4 border-b-blue-300 bg-transparent text-white transition-all duration-300 rounded-none"
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
               >

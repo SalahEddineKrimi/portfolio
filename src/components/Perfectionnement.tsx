@@ -1,20 +1,34 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Award } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
+import { motion } from "framer-motion";
 
 const ProfessionalDevelopment = () => {
+  const [visibleIndex, setVisibleIndex] = useState<number | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const trainings = [
     {
       title: "Analyse dynamique et sismique des ponts et bâtiments (mention A), ÉTS, Montréal, Canada (Hiver 2025)",
-      image: "/img001.png",
+      image: "/Dynamic.png",
     },
     {
       title: "PFE : Conception hydraulique d'une nouvelle attraction touristique, Baie-Comeau, Canada (Été 2024)",
-      image: "https://www.youtube.com/embed/CcOKRiHlIPA", 
+      image: "https://www.youtube.com/embed/CcOKRiHlIPA",
     },
     {
       title: "Ingénierie du vent (mention A+), ÉTS, Montréal, Canada (Automne 2023)",
-      image: "/img003.png",
+      image: "/Wind.png",
     },
     {
       title: "Défi Structure-AL : Conception d'un Belvédère, Abitibi-Témiscamingue, Québec, Canada (2023)",
@@ -26,65 +40,65 @@ const ProfessionalDevelopment = () => {
     },
   ];
 
-  const [visibleIndex, setVisibleIndex] = useState<number | null>(null);
-
   return (
-    <section className="min-h-screen relative z-10 py-20 px-4 flex flex-col justify-center">
-      <div className="max-w-3xl mx-auto px-4">
-        {/* Titre de la section */}
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Perfectionnement Professionnel</h2>
-          <p className="text-xl text-gray-600">Formation continue et spécialisations</p>
-        </div>
+    <section id="perfectionnement" className="min-h-screen relative z-10 py-20 px-4 flex flex-col justify-center overflow-x-hidden">
+      <div className="max-w-6xl mx-auto px-4">
+        <h2 className="text-3xl font-bold text-center text-white mb-12 flex items-center justify-center gap-2">
+          <Award className="w-8 h-8 text-blue-300" />
+          Perfectionnement Professionnel
+        </h2>
 
-        {/* Cartes empilées */}
-        <div className="flex flex-col gap-6">
+        <div className="grid gap-8 md:grid-cols-1">
           {trainings.map((training, index) => (
-            <div key={index}>
-              {/* Carte cliquable */}
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.2 }}
+            >
               <Card
+                className="border-0 border-b-2 hover:border-b-4 border-b-blue-300 bg-transparent text-white transition-all duration-300 cursor-pointer rounded-none"
+                onMouseEnter={() => setHoveredIndex(index)}
+                onMouseLeave={() => setHoveredIndex(null)}
                 onClick={() => setVisibleIndex(visibleIndex === index ? null : index)}
-                className={`cursor-pointer transition-transform transform hover:-translate-y-1 hover:shadow-xl border-2 ${
-                  visibleIndex === index ? "border-blue-400" : "border-gray-200"
-                }`}
               >
-                <CardHeader className="bg-blue-50 border-b p-6">
+                <CardContent className="p-6 space-y-4">
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mt-1">
-                      <Award className="w-6 h-6 text-white" />
+                    <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
+                      <Award className="w-5 h-5 text-white" />
                     </div>
-                    <CardTitle className="text-md font-semibold text-gray-900 leading-snug">
-                      {training.title}
-                    </CardTitle>
+                    <h3 className="text-md font-semibold">{training.title}</h3>
                   </div>
-                </CardHeader>
-              </Card>
 
-              {/* Affichage conditionnel : image ou vidéo */}
-              {visibleIndex === index && (
-                <div className="mt-4 text-center">
-                  {index === 1 ? (
-                    <div className="relative pb-[56.25%] h-0 overflow-hidden rounded-xl shadow-lg border border-blue-200">
-                      <iframe
-                        className="absolute top-0 left-0 w-full h-full"
-                        src={training.image}
-                        title="Vidéo du PFE"
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                      ></iframe>
+                  {(isMobile || hoveredIndex === index || visibleIndex === index) && (
+                    <div className="mt-4 text-center px-4">
+                      {index === 1 ? (
+                        <div className="relative pb-[56.25%] h-0 overflow-hidden rounded-2xl shadow-xl border border-blue-300">
+                          <iframe
+                            className="absolute top-0 left-0 w-full h-full"
+                            src={training.image}
+                            title="Vidéo du PFE"
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                          ></iframe>
+                        </div>
+                      ) : (
+                        <img
+                          src={training.image}
+                          alt="Document de perfectionnement"
+                          className="mx-auto w-full max-w-2xl rounded-2xl shadow-xl border border-blue-300"
+                          onError={() =>
+                            console.error("Image non trouvée:", training.image)
+                          }
+                        />
+                      )}
                     </div>
-                  ) : (
-                    <img
-                      src={training.image}
-                      alt="Document de perfectionnement"
-                      className="mx-auto w-full max-w-2xl rounded-xl shadow-lg border border-blue-200"
-                      onError={() => console.error("Image non trouvée:", training.image)}
-                    />
                   )}
-                </div>
-              )}
-            </div>
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
         </div>
       </div>
