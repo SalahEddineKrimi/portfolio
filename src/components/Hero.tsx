@@ -88,7 +88,7 @@ const Hero = () => {
         </div>
 
         {/* Partie photo ou vidéo */}
-        <div className="flex justify-center lg:justify-end">
+        <div className="flex flex-col items-center lg:items-end">
           {showVideo ? (
             <div className="w-[320px] sm:w-[400px] md:w-[500px] aspect-video rounded-xl overflow-hidden shadow-xl border border-white/20">
               <iframe
@@ -100,29 +100,52 @@ const Hero = () => {
               />
             </div>
           ) : (
-            <div
-              onClick={() => setShowVideo(true)}
-              className="relative group cursor-pointer transition-all duration-300 hover:scale-105"
-            >
-              {/* Halo indicatif */}
-              <div className="absolute inset-0 z-10 rounded-full border-2 border-blue-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-pulse" />
+            <div className="flex flex-col items-center">
+              <div
+                onClick={() => setShowVideo(true)}
+                className="relative group cursor-pointer transition-all duration-300 hover:scale-105"
+              >
+                {/* Halo indicatif */}
+                <div className="absolute inset-0 z-10 rounded-full border-2 border-blue-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-pulse" />
 
-              {/* Icône Play centrée */}
-              <PlayCircle
-                className="absolute inset-0 m-auto w-16 h-16 text-blue-300 opacity-90 group-hover:opacity-100 transition duration-300 z-20"
-              />
+                {/* Icône Play centrée */}
+                <PlayCircle
+                  className="absolute inset-0 m-auto w-16 h-16 text-blue-300 opacity-90 group-hover:opacity-100 transition duration-300 z-20"
+                />
 
-              {/* Texte flottant */}
-              <span className="absolute bottom-[-1.5rem] left-1/2 -translate-x-1/2 text-sm text-blue-300 opacity-0 group-hover:opacity-100 transition duration-300">
-                Cliquez pour voir la vidéo
-              </span>
+                {/* Texte flottant */}
+                <span className="absolute bottom-[-1.5rem] left-1/2 -translate-x-1/2 text-sm text-blue-300 opacity-0 group-hover:opacity-100 transition duration-300">
+                  Cliquez pour voir la vidéo
+                </span>
 
-              {/* Image ronde responsive */}
-              <img
-                src="/lovable-uploads/dcf63844-562a-4a31-a778-751a79adaf9f.png"
-                alt="Salah-Eddine KRIMI"
-                className="w-48 h-48 sm:w-64 sm:h-64 md:w-72 md:h-72 rounded-full object-cover border-4 border-white shadow-lg"
-              />
+                {/* Image ronde responsive */}
+                <img
+                  src="/lovable-uploads/dcf63844-562a-4a31-a778-751a79adaf9f.png"
+                  alt="Salah-Eddine KRIMI"
+                  className="w-48 h-48 sm:w-64 sm:h-64 md:w-72 md:h-72 rounded-full object-cover border-4 border-white shadow-lg"
+                />
+              </div>
+
+              {/* Lien vers YouTube */}
+              <a
+                href="https://www.youtube.com/watch?v=VQpkA8Y5qtU"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-8 animate-pulse rounded-lg border border-red-500 px-6 py-3 flex items-center gap-2 text-lg text-blue-100 hover:bg-red-500 hover:text-white transition duration-300"
+                style={{ animationDuration: "0.8s" }}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="28"
+                  height="28"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  className="text-red-500"
+                >
+                  <path d="M19.615 3.184c-.692-.692-1.492-.957-2.422-1.009C15.607 2.024 12 2 12 2s-3.607.024-5.193.175c-.93.052-1.73.317-2.422 1.009C3.693 3.876 3.428 4.676 3.376 5.606 3.225 7.192 3.2 10.8 3.2 10.8s.024 3.607.175 5.193c.052.93.317 1.73 1.009 2.422.692.692 1.492.957 2.422 1.009 1.586.151 5.193.175 5.193.175s3.607-.024 5.193-.175c.93-.052 1.73-.317 2.422-1.009.692-.692.957-1.492 1.009-2.422.151-1.586.175-5.193.175-5.193s-.024-3.607-.175-5.193c-.052-.93-.317-1.73-1.009-2.422zM10 15.5v-7l6 3.5-6 3.5z" />
+                </svg>
+                <span className="font-semibold">Présentation</span>
+              </a>
             </div>
           )}
         </div>
