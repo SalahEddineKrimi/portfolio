@@ -5,6 +5,33 @@ import { Card, CardContent } from "@/components/ui/card";
 
 const Contact = () => {
   const [submitted, setSubmitted] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("entry.1213216234", name);
+    formData.append("entry.695940212", email);
+    formData.append("entry.62496462", message);
+
+    try {
+      await fetch("https://docs.google.com/forms/d/e/1FAIpQLSeni7iPxnrNH1Ijq_N0O5jqIZFb4gH-rjJCKmLwWP503GqN5w/formResponse", {
+        method: "POST",
+        mode: "no-cors",
+        body: formData,
+      });
+
+      setSubmitted(true);
+      setName("");
+      setEmail("");
+      setMessage("");
+    } catch (error) {
+      console.error("Erreur d'envoi :", error);
+    }
+  };
 
   return (
     <section id="contact" className="py-20 bg-gradient-to-br from-slate-900 to-blue-900">
@@ -19,7 +46,8 @@ const Contact = () => {
               <h3 className="text-2xl font-bold mb-6">Prenons contact</h3>
               <p className="text-blue-200 text-lg leading-relaxed">
                 Je suis actuellement à la recherche de nouvelles opportunités en ingénierie.
-                N’hésitez pas à me contacter pour toute collaboration ou offre d’emploi. Je suis disponible pour échanger et discuter de vos projets.
+                N’hésitez pas à me contacter pour toute collaboration ou offre d’emploi.
+                Je suis disponible pour échanger et discuter de vos projets.
               </p>
             </div>
 
@@ -53,26 +81,14 @@ const Contact = () => {
               <h3 className="text-2xl font-bold text-white mb-6">Envoyez un message</h3>
 
               {!submitted ? (
-                <form
-                  action="https://formsubmit.co/krimisalaheddine@gmail.com"
-                  method="POST"
-                  onSubmit={() => setSubmitted(true)}
-                  className="space-y-6"
-                >
-                  <input type="hidden" name="_captcha" value="false" />
-                  <input type="hidden" name="_template" value="box" />
-                  <input
-                    type="hidden"
-                    name="_autoresponse"
-                    value="Bonjour,\n\nMerci pour votre message. Il a bien été reçu. Je vous répondrai dans les plus brefs délais.\n\n— Salah-Eddine Krimi"
-                  />
-
+                <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
                     <label className="block text-blue-200 text-sm font-medium mb-2">Nom</label>
                     <input
                       type="text"
-                      name="name"
                       required
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
                       className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-blue-200 focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-400/20"
                       placeholder="Votre nom"
                     />
@@ -82,8 +98,9 @@ const Contact = () => {
                     <label className="block text-blue-200 text-sm font-medium mb-2">Email</label>
                     <input
                       type="email"
-                      name="email"
                       required
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                       className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-blue-200 focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-400/20"
                       placeholder="votre.email@exemple.com"
                     />
@@ -92,9 +109,10 @@ const Contact = () => {
                   <div>
                     <label className="block text-blue-200 text-sm font-medium mb-2">Message</label>
                     <textarea
-                      name="message"
-                      rows={4}
                       required
+                      rows={4}
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
                       className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-blue-200 focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-400/20 resize-none"
                       placeholder="Décrivez votre projet ou votre demande..."
                     ></textarea>

@@ -113,10 +113,7 @@ const Hero = () => {
                   className="absolute inset-0 m-auto w-16 h-16 text-blue-300 opacity-90 group-hover:opacity-100 transition duration-300 z-20"
                 />
 
-                {/* Texte flottant */}
-                <span className="absolute bottom-[-1.5rem] left-1/2 -translate-x-1/2 text-sm text-blue-300 opacity-0 group-hover:opacity-100 transition duration-300">
-                  Cliquez pour voir la vidéo
-                </span>
+
 
                 {/* Image ronde responsive */}
                 <img
