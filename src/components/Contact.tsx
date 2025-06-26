@@ -11,7 +11,6 @@ const Contact = () => {
       <div className="max-w-6xl mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-white mb-4">Contact</h2>
-          <p className="text-xl text-blue-200">Discutons de votre prochain projet</p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -19,9 +18,8 @@ const Contact = () => {
             <div>
               <h3 className="text-2xl font-bold mb-6">Prenons contact</h3>
               <p className="text-blue-200 text-lg leading-relaxed">
-                Je suis disponible pour discuter de projets d'ingénierie structurelle, 
-                de conception de ponts et d'ouvrages d'art. N'hésitez pas à me contacter 
-                pour toute collaboration ou opportunité professionnelle.
+                Je suis actuellement à la recherche de nouvelles opportunités en ingénierie.
+                N’hésitez pas à me contacter pour toute collaboration ou offre d’emploi. Je suis disponible pour échanger et discuter de vos projets.
               </p>
             </div>
 
