@@ -10,7 +10,7 @@ const Skills = () => {
       skills: [
         "SAP2000", "SAFI", "Robot", "CSI Bridges", "Advanced Design America", "AutoCad",
         "Civil 3D", "Microsoft Office", "MSproject", "SmartUse", "Revit", "SpColumn",
-        "AquaGeo", "Primavera"
+        "AquaGeo", "Primavera","ArcGis","Visual Basic"
       ],
       color: "bg-blue-500",
       badgeColor: "text-white"

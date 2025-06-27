@@ -43,10 +43,10 @@ const Hero = () => {
             <div className="flex items-center gap-3">
               <Mail className="w-5 h-5 text-blue-300" />
               <a
-                href="mailto:salah-eddine.krimi.1@ens.etsmtl.ca"
+                href="mailto:krimisalaheddine@gmail.com"
                 className="hover:text-blue-300 transition-colors break-all"
               >
-                salah-eddine.krimi.1@ens.etsmtl.ca
+                krimisalaheddine@gmail.com
               </a>
               <a
                 href="https://www.linkedin.com/in/salah-eddine-krimi-967072143/"
@@ -71,7 +71,7 @@ const Hero = () => {
 
           {/* Boutons */}
           <div className="flex flex-wrap gap-4 pt-4">
-            <a href="/SalahEddine_Krimi_202506.pdf" download>
+            <a href="/Salah-Eddine+Krimi+202506.pdf" download>
               <Button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-all duration-300 hover:scale-105">
                 <Download className="w-4 h-4 mr-2" />
                 Télécharger CV
@@ -107,13 +107,6 @@ const Hero = () => {
               >
                 {/* Halo indicatif */}
                 <div className="absolute inset-0 z-10 rounded-full border-2 border-blue-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-pulse" />
-
-                {/* Icône Play centrée */}
-                <PlayCircle
-                  className="absolute inset-0 m-auto w-16 h-16 text-blue-300 opacity-90 group-hover:opacity-100 transition duration-300 z-20"
-                />
-
-
 
                 {/* Image ronde responsive */}
                 <img
