@@ -1,73 +1,74 @@
-# Welcome to your Lovable project
+# ePortfolio – Salah-Eddine Krimi
 
-## Project info
+Bienvenue sur mon ePortfolio professionnel, une vitrine en ligne conçue pour présenter mon parcours, mes projets, mes compétences et mes aspirations en tant qu'ingénieur en structure.
 
-**URL**: https://salahkrimi.vercel.app/
+## 🔗 Accès au site
 
-## How can I edit this code?
+👉 [https://salahkrimi.vercel.app](https://salahkrimi.vercel.app)
 
-There are several ways of editing your application.
+---
 
-**Use Lovable**
+## 🛠️ Technologies utilisées
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/2703353c-ab68-4d64-b4d6-c30d8e9f16ad) and start prompting.
+Ce projet a été conçu avec des technologies modernes et performantes :
 
-Changes made via Lovable will be committed automatically to this repo.
+- [React](https://reactjs.org/) – bibliothèque JavaScript pour construire l’interface utilisateur  
+- [Vite](https://vitejs.dev/) – environnement de développement ultra-rapide  
+- [TypeScript](https://www.typescriptlang.org/) – typage statique pour fiabiliser le code  
+- [Tailwind CSS](https://tailwindcss.com/) – framework CSS utilitaire pour un design réactif  
+- [shadcn/ui](https://ui.shadcn.dev/) + [Radix UI](https://www.radix-ui.com/) – composants d'interface accessibles et stylés  
+- [Framer Motion](https://www.framer.com/motion/) – animations fluides  
+- [react-hook-form](https://react-hook-form.com/) + [zod](https://zod.dev/) – gestion et validation de formulaires  
+- [react-pdf](https://github.com/wojtekmaj/react-pdf) + [simplepdf](https://www.simplepdf.eu/) – affichage intégré de fichiers PDF  
+- [Embla Carousel](https://www.embla-carousel.com/) – carrousels d’images interactifs  
+- [Next Themes](https://github.com/pacocoursey/next-themes) – gestion du thème clair/sombre  
 
-**Use your preferred IDE**
+---
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## ✨ Fonctionnalités principales
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- 🧑‍💼 **Présentation interactive du parcours professionnel**  
+  Des cartes animées présentent mes expériences, projets, compétences et formations.
 
-Follow these steps:
+- 📄 **Affichage intégré de documents PDF**  
+  Consultation directe de mon CV, attestations ou autres documents sans quitter le site.
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+- 🎞️ **Animations fluides et transitions dynamiques**  
+  Les sections et composants apparaissent progressivement avec des effets élégants.
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+- 🖼️ **Carrousels d’images**  
+  Affichage d’images multiples dans certaines sections, défilables horizontalement.
 
-# Step 3: Install the necessary dependencies.
-npm i
+- 🌓 **Mode clair / sombre**  
+  Le site adapte automatiquement son apparence au thème du système ou selon le choix de l’utilisateur.
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+- 📱 **Responsive design**  
+  Compatibilité complète avec les écrans mobiles, tablettes et ordinateurs.
 
-**Edit a file directly in GitHub**
+- 📬 **Formulaire de contact fonctionnel**  
+  Permet aux visiteurs de me contacter directement avec validation en temps réel.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+- 🔎 **Navigation fluide et accessible**  
+  Interface intuitive avec une navigation rapide entre les sections et une accessibilité optimisée.
 
-**Use GitHub Codespaces**
+---
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 🧪 Installation locale 
 
-## What technologies are used for this project?
+> à venir
 
-This project is built with:
+## 👤 À propos
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+> *(Une section « Crédits » ou « À propos » sera bientôt intégrée pour inclure des liens professionnels et informations complémentaires.)*
 
-## How can I deploy this project?
+---
 
-Simply open [Lovable](https://lovable.dev/projects/2703353c-ab68-4d64-b4d6-c30d8e9f16ad) and click on Share -> Publish.
+## 📄 Licence
 
-## Can I connect a custom domain to my Lovable project?
+Ce projet est personnel et le code source est pour l’instant privé.
 
-Yes, you can!
+---
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+Merci de votre visite 🙏  
+Pour toute question ou opportunité de collaboration, n'hésitez pas à me contacter via le formulaire du site.
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
